@@ -17,7 +17,8 @@ namespace FutureValue
             InitializeComponent();
         }
         // David J Austin
-        // TODO: Declare the rectangular array and the row index here
+        string[,] values = new string[10, 4];
+        int row = 0;
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
