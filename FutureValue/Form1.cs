@@ -16,9 +16,9 @@ namespace FutureValue
         {
             InitializeComponent();
         }
-        // David J Austin
+
         string[,] values = new string[10, 4];
-        int row = 0;
+        int rowCounter = 0;
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
@@ -40,7 +40,13 @@ namespace FutureValue
                     txtFutureValue.Text = futureValue.ToString("c");
                     txtMonthlyInvestment.Focus();
 
-                    // TODO: Add the calculation to the rectangular array here
+                    //Added the calculation to the rectangular array here
+                    decimal interestRatePercent = interestRateYearly / 100;
+                    values[rowCounter, 0] = monthlyInvestment.ToString("c");
+                    values[rowCounter, 1] = interestRatePercent.ToString("p1");
+                    values[rowCounter, 2] = years.ToString();
+                    values[rowCounter, 3] = futureValue.ToString("c");
+                    rowCounter++;
                 }
             }
             catch (Exception ex)
@@ -140,8 +146,21 @@ namespace FutureValue
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            // TODO: Display the rectangular array in a dialog box here
-            
+            //Display the rectangular array in a dialog box
+            string tabTitles = "Inv/Mo.\tRate\tYears\tFuture Value\n";
+            string message = "";
+            for (int i =0; i < values.GetLength(0); i++)
+            {
+                if (values[i, 0] != null)
+                {
+                    for (int j = 0; j < values.GetLength(1); j++)
+                    {
+                        message += values[i, j] + "\t";
+                    }
+                    message += "\n";
+                }
+            }
+            MessageBox.Show(tabTitles + message, "Future Value Calculations");
             this.Close();
         }
 
